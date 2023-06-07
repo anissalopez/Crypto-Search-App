@@ -6,7 +6,19 @@ const priceSelection = document.querySelector('#price-menu')
 form.addEventListener("submit", cryptoFetch);
 priceSelection.addEventListener('change', cryptoFetch)
 
-
+//fetch API function 
+function cryptoFetch(e){
+    //prevent form from resetting;
+    e.preventDefault();
+    fetch(`https://api.coincap.io/v2/assets`)
+    .then(function (response){
+        return response.json()
+    })
+    .then(function(data){
+        let crypto = data
+        searchHandler(crypto)
+    });
+};
 
 
 //searchHandler
