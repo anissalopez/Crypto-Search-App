@@ -1,10 +1,13 @@
 //DOM element selection to that will trigger event listeners 
 const form = document.querySelector('#form');
-const priceSelection = document.querySelector('#price-menu')
+const priceSelection = document.querySelector('#price-menu');
+const clearSearch = document.querySelector('#clear');
 
 //Event Listeners
 form.addEventListener("submit", cryptoFetch);
-priceSelection.addEventListener('change', cryptoFetch)
+priceSelection.addEventListener('change', cryptoFetch);
+clearSearch.addEventListener('click', clearPage);
+
 
 //fetch API function 
 function cryptoFetch(e){
@@ -23,14 +26,13 @@ function cryptoFetch(e){
 
 //searchHandler
 function searchHandler(crypto){
-  let cryptoData = crypto['data']
+  let cryptoData = crypto['data'];
   const searchValue = document.querySelector('#search').value;
   form.reset();
 
     if(searchValue){
         for (let object of cryptoData){
             if (object.name.toLowerCase() === searchValue.toLowerCase()){
-                console.log(object)
             appendElements(object);
              };
         };
@@ -59,17 +61,19 @@ function searchHandler(crypto){
 
 //function to handle the appending of Elements to the DOM
  function appendElements(object){
+    console.log(object);
     
     let coinDiv = document.querySelector('#coinDiv');
-    let coinName = document.createElement('p')
+    let coinName = document.createElement('p');
     
-    let coinSymbol = document.createElement('p')
-    let coinPrice = document.createElement('p')
-    coinName.classList.add('second-color')
+    let coinSymbol = document.createElement('p');
+    let coinPrice = document.createElement('p');
+    coinName.classList.add('second-color');
   
     //formatting coin Price
-    let coinValue = Math.round(object.priceUsd*100)/100;
-    let formattedValue = coinValue.toLocaleString();
+    let price = object['priceUsd'];
+    let formattedPrice = Number(price).toFixed(2);
+    let formattedValue = formattedPrice > 999 ? numberFormat(formattedPrice) : formattedPrice;
 
     //assigning dom elements respective text value 
     coinName.textContent = `Coin Name: ${object.name}`;
@@ -84,11 +88,20 @@ function searchHandler(crypto){
     //add another event listener to coin name so that User can see prior day price when they hover over name of Bitcoin
    coinName.addEventListener('mouseover', (event) => {
     coinName.title = object['changePercent24Hr'];
-
    });
  };
 
-        
+ //function to clear page
+
+ function clearPage(e){
+    let coinDiv = document.querySelector('#coinDiv');
+    coinDiv.innerHTML = "";
+}
+
+//function using regex pattern to search the string and put a comma where it finds 3 consecutive digits 
+function numberFormat(num){
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
         
      
     
