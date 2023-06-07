@@ -3,9 +3,16 @@ Crypto Price Search App is an app that allows you to easily search for current p
 
 ## Description
 
-This app utilizes the promise-based Fetch API method to access data from the coincap api. The app has three files -- an html, javaScript and css file. The app primarily utilizes JavaScript manipulate the data received from the coincap json file. The app has three unique JavaScript event listeners that allow the  the respective crypto-currency's name, symbol, and current price to the DOM. The app has three unique JavasScript event listeners for user interactivity. The first event
+This app utilizes the promise-based Fetch API method to access data from the coincap api. The app has three files -- an html, javaScript and css file. The app primarily utilizes JavaScript to manipulate the data received from the coincap json file. The app does this through three unique JavaScript event listeners -- a submit event listener that allows the user to search for a crypto-currency by name, a change event listener that gives the user the ability to utilize a drop-down menu to search for crypto-currency by price range, and a mouseover event listener that adds a bit more interactivity by giving the user the ability to see the 24 hour percent change in price when a user hovers over the respective crypto-currency's name. A seperate function is triggered that appends the respective crypto-currency's name, symbol and price to the DOM after the user searches manually by name or by price range. 
+
+
 
 ## Getting Started
+
+To get started open the index.html in the your browser
+
+![](indexhtml.gif)
+
 
 ### Dependencies
 
