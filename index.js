@@ -61,7 +61,6 @@ function searchHandler(crypto){
 
 //function to handle the appending of Elements to the DOM
  function appendElements(object){
-    console.log(object);
     
     let coinDiv = document.querySelector('#coinDiv');
     let coinName = document.createElement('p');
@@ -95,7 +94,7 @@ function searchHandler(crypto){
 
  function clearPage(e){
     let coinDiv = document.querySelector('#coinDiv');
-    coinDiv.innerHTML = "";
+    coinDiv.textContent = "";
 }
 
 //function using regex pattern to search the string and put a comma where it finds 3 consecutive digits 
