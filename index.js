@@ -2,33 +2,29 @@
 const form = document.querySelector('#form');
 const priceSelection = document.querySelector('#price-menu');
 const clearSearch = document.querySelector('#clear');
-const searchValue = document.querySelector('#search').value;
 
 //Event Listeners
 form.addEventListener("submit", cryptoFetch);
 priceSelection.addEventListener('change', cryptoFetch);
 clearSearch.addEventListener('click', clearPage);
 
-
 //fetch API function 
 function cryptoFetch(e){
     //prevent form from resetting;
     e.preventDefault();
     fetch(`https://api.coincap.io/v2/assets`)
-    .then((response) => {
-        return response.json()
-    })
+    .then((response) => response.json())
     .then((data) => {
         let crypto = data
         searchHandler(crypto)
     });
 };
 
-
 //searchHandler
 function searchHandler(crypto){
   const cryptoData = crypto['data'];
-  const searchValue = document.querySelector('#search').value;
+  const searchValue = document.querySelector('#search')
+  
   form.reset();
 
     if(searchValue){
