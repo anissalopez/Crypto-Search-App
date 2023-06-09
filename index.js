@@ -14,10 +14,10 @@ function cryptoFetch(e){
     //prevent form from resetting;
     e.preventDefault();
     fetch(`https://api.coincap.io/v2/assets`)
-    .then(function (response){
+    .then((response) => {
         return response.json()
     })
-    .then(function(data){
+    .then((data) => {
         let crypto = data
         searchHandler(crypto)
     });
