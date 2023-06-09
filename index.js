@@ -23,31 +23,31 @@ function cryptoFetch(e){
 //searchHandler
 function searchHandler(crypto){
   const cryptoData = crypto['data'];
-  const searchValue = document.querySelector('#search')
+  const searchValue = document.querySelector('#search').value
   
   form.reset();
 
     if(searchValue){
-        for (let object of cryptoData){
+        for (const object of cryptoData){
             if (object.name.toLowerCase() === searchValue.toLowerCase()){
             appendElements(object);
              };
         };
     }
     else if(priceSelection.value === `Under $500`){
-        for(let object of cryptoData){
+        for(const object of cryptoData){
             if(object.priceUsd < 500){appendElements(object)
              };
         };
     }
    else if(priceSelection.value === `$500 to $1,000`){
-        for(let object of cryptoData){
+        for(const object of cryptoData){
             if(object.priceUsd > 500 && object.priceUsd < 1000){ appendElements(object)
             };
         };
      }
     else if(priceSelection.value === `Over $1,000`){
-         for(let object of cryptoData){
+         for(const object of cryptoData){
              if(object.priceUsd > 1000){ appendElements(object)
              };
          };
@@ -58,13 +58,14 @@ function searchHandler(crypto){
 //function to handle the appending of Elements to the DOM
  function appendElements(object){
     
-    let coinDiv = document.querySelector('#coinDiv');
+    const coinDiv = document.querySelector('#coinDiv');
+   
     let coinName = document.createElement('p');
-    
     let coinSymbol = document.createElement('p');
     let coinPrice = document.createElement('p');
+
     coinName.classList.add('second-color');
-  
+   
     //formatting coin Price
     let price = object['priceUsd'];
     let formattedPrice = Number(price).toFixed(2);
@@ -87,16 +88,13 @@ function searchHandler(crypto){
  };
 
  //function to clear page
-
  function clearPage(e){
     let coinDiv = document.querySelector('#coinDiv');
     coinDiv.textContent = "";
 }
 
 //function using regex pattern to search the string and put a comma where it finds 3 consecutive digits 
-function numberFormat(num){
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+numberFormat = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         
      
     
