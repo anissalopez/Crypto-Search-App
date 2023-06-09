@@ -2,6 +2,7 @@
 const form = document.querySelector('#form');
 const priceSelection = document.querySelector('#price-menu');
 const clearSearch = document.querySelector('#clear');
+const searchValue = document.querySelector('#search').value;
 
 //Event Listeners
 form.addEventListener("submit", cryptoFetch);
@@ -26,7 +27,7 @@ function cryptoFetch(e){
 
 //searchHandler
 function searchHandler(crypto){
-  let cryptoData = crypto['data'];
+  const cryptoData = crypto['data'];
   const searchValue = document.querySelector('#search').value;
   form.reset();
 
@@ -36,7 +37,6 @@ function searchHandler(crypto){
             appendElements(object);
              };
         };
-
     }
     else if(priceSelection.value === `Under $500`){
         for(let object of cryptoData){
