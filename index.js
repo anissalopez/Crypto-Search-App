@@ -1,16 +1,12 @@
-//DOM element selection to that will trigger event listeners 
 const form = document.querySelector('#form');
 const priceSelection = document.querySelector('#price-menu');
 const clearSearch = document.querySelector('#clear');
 
-//Event Listeners
 form.addEventListener("submit", cryptoFetch);
 priceSelection.addEventListener('change', cryptoFetch);
 clearSearch.addEventListener('click', clearPage);
 
-//fetch API function 
 function cryptoFetch(e){
-    //prevent form from resetting;
     e.preventDefault();
     fetch(`https://api.coincap.io/v2/assets`)
     .then((response) => response.json())
@@ -20,7 +16,6 @@ function cryptoFetch(e){
     });
 };
 
-//searchHandler
 function searchHandler(crypto){
   const cryptoData = crypto['data'];
   const searchValue = document.querySelector('#search').value
@@ -54,8 +49,6 @@ function searchHandler(crypto){
      };
  };
 
-
-//function to handle the appending of Elements to the DOM
  function appendElements(object){
     
     const coinDiv = document.querySelector('#coinDiv');
@@ -66,33 +59,27 @@ function searchHandler(crypto){
 
     coinName.classList.add('second-color');
    
-    //formatting coin Price
     let price = object['priceUsd'];
     let formattedPrice = Number(price).toFixed(2);
     let formattedValue = formattedPrice > 999 ? numberFormat(formattedPrice) : formattedPrice;
 
-    //assigning dom elements respective text value 
     coinName.textContent = `Coin Name: ${object.name}`;
     coinSymbol.textContent = `Coin Symbol: ${object.symbol}`;
     coinPrice.textContent = `Current Price: $${formattedValue}`;
-        
-    //appending elements to the DOM   
+          
     coinDiv.appendChild(coinName);
     coinDiv.appendChild(coinSymbol);
     coinDiv.appendChild(coinPrice);
   
-    //add another event listener to coin name so that User can see prior day price when they hover over name of Bitcoin
    coinName.addEventListener('mouseover', (event) => {
     coinName.title = object['changePercent24Hr'];
    });
  };
 
- //function to clear page
  function clearPage (e){
     return coinDiv.textContent = "";
  }
-
-//function using regex pattern to search the string and put a comma where it finds 3 consecutive digits 
+ 
 numberFormat = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         
      
