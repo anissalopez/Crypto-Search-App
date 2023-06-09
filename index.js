@@ -88,10 +88,9 @@ function searchHandler(crypto){
  };
 
  //function to clear page
- function clearPage(e){
-    let coinDiv = document.querySelector('#coinDiv');
-    coinDiv.textContent = "";
-}
+ function clearPage (e){
+    return coinDiv.textContent = "";
+ }
 
 //function using regex pattern to search the string and put a comma where it finds 3 consecutive digits 
 numberFormat = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
