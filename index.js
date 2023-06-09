@@ -19,7 +19,6 @@ function cryptoFetch(e){
 function searchHandler(crypto){
   const cryptoData = crypto['data'];
   const searchValue = document.querySelector('#search').value
-  
   form.reset();
 
     if(searchValue){
@@ -50,9 +49,7 @@ function searchHandler(crypto){
  };
 
  function appendElements(object){
-    
     const coinDiv = document.querySelector('#coinDiv');
-   
     let coinName = document.createElement('p');
     let coinSymbol = document.createElement('p');
     let coinPrice = document.createElement('p');
@@ -79,7 +76,7 @@ function searchHandler(crypto){
  function clearPage (e){
     return coinDiv.textContent = "";
  }
- 
+
 numberFormat = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         
      
