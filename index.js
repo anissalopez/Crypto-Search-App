@@ -9,8 +9,8 @@ clearSearch.addEventListener('click', clearPage);
 function cryptoFetch(e){
     e.preventDefault();
     fetch(`https://api.coincap.io/v2/assets`)
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
         let crypto = data
         searchHandler(crypto)
     });
