@@ -11,8 +11,7 @@ function cryptoFetch(e){
     fetch(`https://api.coincap.io/v2/assets`)
     .then(response => response.json())
     .then(data => {
-        let crypto = data
-        searchHandler(crypto)
+        searchHandler(data)
     });
 };
 
@@ -20,32 +19,36 @@ function searchHandler(crypto){
   const cryptoData = crypto['data'];
   const searchValue = document.querySelector('#search').value
   form.reset();
+  console.log(cryptoData)
 
     if(searchValue){
-        for (const object of cryptoData){
-            if (object.name.toLowerCase() === searchValue.toLowerCase()){
-            appendElements(object);
-             };
-        };
+        cryptoData.forEach((coin) => {
+            if(coin.name.toLowerCase() === searchValue.toLowerCase()){
+                appendElements(coin)
+            }
+        })
     }
     else if(priceSelection.value === `Under $500`){
-        for(const object of cryptoData){
-            if(object.priceUsd < 500){appendElements(object)
-             };
-        };
+        cryptoData.forEach((coin) => {
+            if(coin.priceUsd < 500){
+             appendElements(coin)
+            }
+        })
     }
    else if(priceSelection.value === `$500 to $1,000`){
-        for(const object of cryptoData){
-            if(object.priceUsd > 500 && object.priceUsd < 1000){ appendElements(object)
+        cryptoData.forEach((coin) => {
+            if(coin.priceUsd > 500 && coin.priceUsd < 1000){
+                appendElements(coin);
             };
-        };
-     }
+        });
+    }
     else if(priceSelection.value === `Over $1,000`){
-         for(const object of cryptoData){
-             if(object.priceUsd > 1000){ appendElements(object)
-             };
-         };
-     };
+        cryptoData.forEach((coin) => {
+            if(coin.priceUsd > 1000){
+                appendElements(coin);
+            };
+        });
+    };
  };
 
  function appendElements(object){
@@ -58,6 +61,7 @@ function searchHandler(crypto){
    
     let price = object['priceUsd'];
     let formattedPrice = Number(price).toFixed(2);
+    const numberFormat = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     let formattedValue = formattedPrice > 999 ? numberFormat(formattedPrice) : formattedPrice;
 
     coinName.textContent = `Coin Name: ${object.name}`;
@@ -68,7 +72,7 @@ function searchHandler(crypto){
     coinDiv.appendChild(coinSymbol);
     coinDiv.appendChild(coinPrice);
   
-   coinName.addEventListener('mouseover', (event) => {
+    coinName.addEventListener('mouseover', (event) => {
     coinName.title = object['changePercent24Hr'];
    });
  };
@@ -77,7 +81,7 @@ function searchHandler(crypto){
     return coinDiv.textContent = "";
  }
 
-numberFormat = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
         
      
     
